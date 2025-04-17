@@ -117,13 +117,44 @@ app-template:
         - secretName: jellyfin-tls-certificate
           hosts:
             - *jellyfinHost
-            - *transmissionHost
             - *prowlarrHost
             - *radarrHost
             - *sonarrHost
             - *jellyseerrHost
+            - *bazarrHost
+            - *lidarrHost
   persistence:
+    # NFS data volume for media content
     data:
+      enabled: true
+      existingClaim: jellyfin-data-pvc
+      advancedMounts:
+        main:
+          main:
+            - path: /data/media
+              subPath: media
+          transmission:
+            - path: /data/torrents
+              subPath: torrents
+          radarr:
+            - path: /data/media
+              subPath: media
+          sonarr:
+            - path: /data/media
+              subPath: media
+          bazarr:
+            - path: /data/media
+              subPath: media
+          lidarr:
+            - path: /data/media
+              subPath: media
+          sabnzbd:
+            - path: /data/usenet
+              subPath: usenet
+    
+    # Config storage on default storage class (Rook-CEPH)
+    config:
+      enabled: true
       accessMode: ReadWriteOnce
       size: 50Gi
       advancedMounts:
@@ -131,10 +162,6 @@ app-template:
           main:
             - path: /config
               subPath: jellyfin/config
-            - path: /media/movies
-              subPath: movies
-            - path: /media/shows
-              subPath: shows
           transmission:
             - path: /config
               subPath: transmission/config
@@ -160,3 +187,12 @@ app-template:
           jellyseerr:
             - path: /app/config
               subPath: jellyseerr/config
+          lidarr:
+            - path: /config
+              subPath: lidarr/config
+          bazarr:
+            - path: /config
+              subPath: bazarr/config
+          sabnzbd:
+            - path: /config
+              subPath: sabnzbd/config
