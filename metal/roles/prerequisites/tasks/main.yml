@@ -1,9 +1,9 @@
-- name: Install required packages
-  ansible.builtin.apt:
+- name: Install required packages (Fedora/RHEL)
+  ansible.builtin.dnf:
     name:
-      - nfs-common  # Required for mounting NFS volumes in Kubernetes
+      - nfs-utils  # Required for mounting NFS volumes in Kubernetes
     state: present
-    update_cache: yes
+  when: ansible_os_family == "RedHat"
 
 - name: Adjust kernel parameters
   ansible.posix.sysctl:
