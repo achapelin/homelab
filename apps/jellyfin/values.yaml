@@ -16,10 +16,6 @@ app-template:
           image:
             repository: docker.io/jellyfin/jellyfin
             tag: 10.8.13
-        transmission:
-          image:
-            repository: lscr.io/linuxserver/transmission
-            tag: 4.0.5
         prowlarr:
           image:
             repository: lscr.io/linuxserver/prowlarr
@@ -36,6 +32,14 @@ app-template:
           image:
             repository: docker.io/fallenbagel/jellyseerr
             tag: 1.7.0
+        bazarr:
+          image:
+            repository: lscr.io/linuxserver/bazarr
+            tag: latest
+        lidarr:
+          image:
+            repository: lscr.io/linuxserver/lidarr
+            tag: latest
   service:
     main:
       ports:
@@ -133,24 +137,16 @@ app-template:
           main:
             - path: /data/media
               subPath: media
-          transmission:
-            - path: /data/torrents
-              subPath: torrents
           radarr:
-            - path: /data/media
-              subPath: media
+            - path: /data
           sonarr:
-            - path: /data/media
-              subPath: media
+            - path: /data
           bazarr:
             - path: /data/media
               subPath: media
           lidarr:
             - path: /data/media
               subPath: media
-          sabnzbd:
-            - path: /data/usenet
-              subPath: usenet
     
     # Config storage on default storage class (Rook-CEPH)
     config:
@@ -162,28 +158,15 @@ app-template:
           main:
             - path: /config
               subPath: jellyfin/config
-          transmission:
-            - path: /config
-              subPath: transmission/config
-            - path: /downloads
-              subPath: transmission/downloads
           prowlarr:
             - path: /config
               subPath: prowlarr/config
           radarr:
             - path: /config
               subPath: radarr/config
-            - path: /downloads/complete
-              subPath: transmission/downloads/complete
-            - path: /movies
-              subPath: movies
           sonarr:
             - path: /config
               subPath: sonarr/config
-            - path: /downloads/complete
-              subPath: transmission/downloads/complete
-            - path: /shows
-              subPath: shows
           jellyseerr:
             - path: /app/config
               subPath: jellyseerr/config
@@ -193,6 +176,3 @@ app-template:
           bazarr:
             - path: /config
               subPath: bazarr/config
-          sabnzbd:
-            - path: /config
-              subPath: sabnzbd/config
