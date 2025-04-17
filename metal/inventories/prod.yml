@@ -7,8 +7,8 @@ metal:
   children:
     masters:
       hosts:
-        queen1: {ansible_host: 192.168.20.71, mac: 'e8:ff:1e:d9:4d:b8', disk: sda, network_interface: eno1}
+        queen1: {ansible_host: 192.168.20.71, mac: 'e8:ff:1e:d9:4d:b8', disk: sda, network_interface: eth0}
     workers:
       hosts:
-        bee1: {ansible_host: 192.168.20.81, mac: 'e8:ff:1e:d9:49:36', disk: sda, network_interface: eno1}
-        bee2: {ansible_host: 192.168.20.82, mac: 'e8:ff:1e:d9:47:d5', disk: sda, network_interface: eno1}
+        bee1: {ansible_host: 192.168.20.81, mac: 'e8:ff:1e:d9:49:36', disk: sda, network_interface: eth0}
+        bee2: {ansible_host: 192.168.20.82, mac: 'e8:ff:1e:d9:47:d5', disk: sda, network_interface: eth0}
