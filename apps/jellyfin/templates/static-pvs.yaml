@@ -1,0 +1,35 @@
+{{- if .Values.staticPersistence.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jellyfin-data-pv
+  labels:
+    app: jellyfin
+spec:
+  capacity:
+    storage: {{ .Values.staticPersistence.dataVolume.size }}
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-static
+  nfs:
+    server: {{ .Values.staticPersistence.nfsServer }}
+    path: {{ .Values.staticPersistence.dataVolume.path }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-data-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.staticPersistence.dataVolume.size }}
+  storageClassName: nfs-static
+  selector:
+    matchLabels:
+      app: jellyfin
+{{- end }}

@@ -1,3 +1,10 @@
+staticPersistence:
+  enabled: true
+  nfsServer: 192.168.20.92
+  dataVolume:
+    path: /volume4/data
+    size: 3Ti
+
 app-template:
   defaultPodOptions:
     securityContext:
@@ -64,13 +71,6 @@ app-template:
               service:
                 name: main
                 port: http
-        - host: &transmissionHost transmission.khuedoan.com
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                name: main
-                port: transmission
         - host: &prowlarrHost prowlarr.khuedoan.com
           paths:
             - path: /
@@ -99,6 +99,20 @@ app-template:
               service:
                 name: main
                 port: jellyseerr
+        - host: &bazarrHost bazarr.achapelin.com
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                name: jellyfin-bazarr
+                port: 6767
+        - host: &lidarrHost lidarr.achapelin.com
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                name: jellyfin-lidarr
+                port: 8686
       tls:
         - secretName: jellyfin-tls-certificate
           hosts:
