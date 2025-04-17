@@ -77,10 +77,6 @@ app-template:
                 description: Document management system
                 icon: paperless.svg
           - Management:
-            - Transmission:
-                href: https://transmission.achapelin.com
-                description: Bittorrent client
-                icon: transmission.svg
             - Prowlarr:
                 href: https://prowlarr.achapelin.com
                 description: Indexer manager
