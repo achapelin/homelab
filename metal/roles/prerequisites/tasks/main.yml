@@ -1,3 +1,10 @@
+- name: Install required packages
+  ansible.builtin.apt:
+    name:
+      - nfs-common  # Required for mounting NFS volumes in Kubernetes
+    state: present
+    update_cache: yes
+
 - name: Adjust kernel parameters
   ansible.posix.sysctl:
     name: "{{ item.name }}"
