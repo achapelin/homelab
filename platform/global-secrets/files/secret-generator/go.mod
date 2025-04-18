@@ -1,4 +1,4 @@
-module git.achapelin.com/khuedoan/homelab/platform/secret-generator
+module git.achapelin.com/achapelin/homelab/platform/secret-generator
 
 go 1.19
 
