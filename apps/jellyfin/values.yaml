@@ -8,7 +8,9 @@ staticPersistence:
 app-template:
   defaultPodOptions:
     securityContext:
-      fsGroup: 1000
+      runAsUser: 1029
+      runAsGroup: 100
+      fsGroup: 100
   controllers:
     main:
       containers:
@@ -147,7 +149,7 @@ app-template:
           lidarr:
             - path: /data/media
               subPath: media
-    
+
     # Config storage on default storage class (Rook-CEPH)
     config:
       enabled: true

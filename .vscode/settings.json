@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///Users/mathislgs/homelab/homelab/metal/cluster.yml"
-    }
+    },
+    "yaml.customTags": ["!secret scalar", "!env_var scalar"]
 }
